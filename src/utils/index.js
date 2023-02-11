@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 // 判断是不是空值。如 '' null
 export const isFalsy = (value) => (value === 0 ? false : !value);
 
@@ -10,4 +12,21 @@ export const cleanObject = (object) => {
     }
   });
   return result;
+};
+
+export const useMount = (fn) => {
+  useEffect(() => {
+    fn();
+  }, []);
+};
+export const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    // 每次在value变化后，设置一个定时器
+    const timeout = setTimeout(() => setDebouncedValue(value), delay);
+    // 每次在上一个useEffect处理完以后再运行
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
+  return debouncedValue;
 };
