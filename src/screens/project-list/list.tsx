@@ -1,4 +1,5 @@
 import { User } from "./search-panel";
+import React from "react";
 export interface Project {
   id: string;
   name: string;

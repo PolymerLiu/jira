@@ -1,17 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { loadDevTools } from "jira-dev-tool";
+import { loadServer,DevTools } from "jira-dev-tool";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = document.getElementById("root");
 
-loadDevTools(() => {
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
+loadServer(() => {
+  ReactDOM.render(<React.StrictMode>
+    <DevTools />
+    <App />
+  </React.StrictMode>,root);
 });

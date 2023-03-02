@@ -1,3 +1,4 @@
+import React from "react";
 import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useEffect, useState } from "react";
@@ -16,7 +17,7 @@ export const ProjectListScreen = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:3001/projects?${qs.stringify(
+      `${apiUrl}?${qs.stringify(
         cleanObject(debouncedParam)
       )}`
     ).then(async (res) => {
@@ -26,7 +27,7 @@ export const ProjectListScreen = () => {
     });
   }, [debouncedParam]);
   useEffect(() => {
-    fetch(`http://localhost:3001/users`).then(async (res) => {
+    fetch(`${apiUrl}`).then(async (res) => {
       if (res.ok) {
         setUsers(await res.json());
       }
