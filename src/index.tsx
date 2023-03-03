@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { loadServer,DevTools } from "jira-dev-tool";
+import { loadServer, DevTools } from "jira-dev-tool";
+import { AppProviders } from "context";
 
 const root = document.getElementById("root");
 
 loadServer(() => {
   ReactDOM.render(<React.StrictMode>
     <DevTools />
-    <App />
-  </React.StrictMode>,root);
+    <AppProviders>
+      <App />
+    </AppProviders>
+  </React.StrictMode>, root);
 });
