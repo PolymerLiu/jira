@@ -17,9 +17,9 @@ export const ProjectListScreen = () => {
 
   useEffect(() => {
     fetch(
-      `${apiUrl}?${qs.stringify(
+      `${apiUrl}${qs.stringify(
         cleanObject(debouncedParam)
-      )}`
+      )}/projects?`
     ).then(async (res) => {
       if (res.ok) {
         setList(await res.json());
@@ -27,7 +27,7 @@ export const ProjectListScreen = () => {
     });
   }, [debouncedParam]);
   useEffect(() => {
-    fetch(`${apiUrl}`).then(async (res) => {
+    fetch(`${apiUrl}/users`).then(async (res) => {
       if (res.ok) {
         setUsers(await res.json());
       }
