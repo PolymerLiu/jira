@@ -47,3 +47,47 @@ export const useHttp = () => {
   // Parameters获取和http方法一样的type, 不需要重新声明
   return (...[endpoint, config]: Parameters<typeof http>) => http(endpoint, { ...config, token: user?.token })
 }
+
+// 类型别名、
+// 联合类型
+let myFavoriteNumber: string | number;
+myFavoriteNumber = "seven";
+myFavoriteNumber = 7;
+// TS2322: Type '{}' is not assignable to type 'string | number'.
+// myFavoriteNumber = {}
+let jackFavoriteNumber: string | number;
+
+// 类型别名在很多情况下可以和interface互换
+// interface Person {
+//   name: string
+// }
+// type Person = { name: string }
+// const xiaoMing: Person = {name: 'xiaoming'}
+
+// 类型别名, interface 在这种情况下没法替代type
+type FavoriteNumber = string | number;
+let roseFavoriteNumber: FavoriteNumber = "6";
+
+
+// Utility Type 讲解
+// interface 也没法实现Utility type
+type Person = {
+  name: string;
+  age: number;
+};
+// Partial将Person中的属性变成可选
+const xiaoMing: Partial<Person> = {};
+
+// Omit将Person中的属性删除
+const shenMiRen: Omit<Person, "name" | "age"> = {};
+
+// 5-10
+type PersonKeys = keyof Person;
+type PersonOnlyName = Pick<Person, "name" | "age">;
+type Age = Exclude<PersonKeys, "name">;
+
+// Partial 的实现
+type Partial<T> = {
+  // keyof 获取 T里面所有的key
+  [P in keyof T]?: T[P];
+};
