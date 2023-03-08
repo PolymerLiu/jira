@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import Card from "antd/lib/card";
 import { useAuth } from "context/auth-context";
 import React from "react";
+import { LongButton } from "unauthenticated-app";
 
 export const RegisterScreen = () => {
   const { register } = useAuth()
@@ -24,12 +25,9 @@ export const RegisterScreen = () => {
           <Input placeholder={"密码"} type="password" id={"password"} />
         </Form.Item>
         <Form.Item>
-          {/* <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>
-          登录
-        </LongButton> */}
-          <Button htmlType={"submit"} type={"primary"}>
+          <LongButton htmlType={"submit"} type={"primary"}>
             注册
-          </Button>
+          </LongButton>
         </Form.Item>
       </Card>
 
