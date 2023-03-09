@@ -3,13 +3,23 @@ import { useEffect, useState } from "react";
 // 判断是不是空值。如 '' null
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
-export const cleanObject = (object: object) => {
+export const isVoid = (value: unknown) => (value === undefined || value === null || value === '');
+
+// let a: object
+// a = {name: 'jack'}
+// a = () => {
+// }
+// a = new RegExp('')
+//
+// let b: { [key: string]: unknown }
+// b = {name: 'Jack'}
+// b = () => {}
+// 在一个函数里，改变传入的对象本身是不好的
+export const cleanObject = (object: { [key: string]: unknown }) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
-    // @ts-ignore
     const value = result[key];
-    if (isFalsy(value)) {
-      // @ts-ignore
+    if (isVoid(value)) {
       delete result[key];
     }
   });
@@ -19,6 +29,7 @@ export const cleanObject = (object: object) => {
 export const useMount = (fn: () => void) => {
   useEffect(() => {
     fn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export const useDebounce = <V>(value: V, delay?: number) => {
