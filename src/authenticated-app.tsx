@@ -18,7 +18,9 @@ import { Button, Dropdown, Menu } from "antd"
  */
 export const AuthenticatedApp = () => {
   const { user, logout } = useAuth()
+  const value: any = undefined
   return <Container>
+    {/* {value.notExist}  */}
     <Header between={true}>
       <HeaderLeft gap={2}>
         {/* <img src={softwareLogo} /> */}
