@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 
 // 判断是不是空值。如 '' null
@@ -64,18 +65,17 @@ export const useArray = <T>(initialArray: T[]) => {
 };
 
 export const useDocumentTitle = (title: string, keepOnUnmount: boolean = true) => {
-  const oldTitle = document.title
-  console.log('++++渲染时的', oldTitle);
+  const oldTitle = useRef(document.title).current
+
   useEffect(() => {
     document.title = title
-  }, [title, oldTitle, keepOnUnmount])
+  }, [title])
 
   useEffect(() => {
     return () => {
       if (!keepOnUnmount) {
-        console.log('++++卸载时的', oldTitle);
         document.title = oldTitle
       }
     }
-  }, [])
+  }, [oldTitle, keepOnUnmount])
 }
