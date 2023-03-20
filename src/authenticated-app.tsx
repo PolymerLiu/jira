@@ -6,6 +6,7 @@ import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg'
 import { Button, Dropdown, Menu } from "antd"
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProjectScreen } from "screens/project"
+import { resetRoute } from "utils"
 
 /**
  * grid 和 flex 各自的应用场景
@@ -25,7 +26,7 @@ export const AuthenticatedApp = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/projects" element={<ProjectListScreen />} />
-          <Route path="/projects/:projectId" element={<ProjectScreen />} />
+          <Route path="/projects/:projectId/*" element={<ProjectScreen />} />
         </Routes>
       </BrowserRouter>
     </Main>
@@ -37,7 +38,9 @@ const PageHeader = () => {
   return <Header between={true}>
     <HeaderLeft gap={2}>
       {/* <img src={softwareLogo} /> */}
-      <SoftwareLogo width={'18rem'} color={"rgb(38, 132, 255)"} />
+      <Button type="link" onClick={resetRoute}>
+        <SoftwareLogo width={'18rem'} color={"rgb(38, 132, 255)"} />
+      </Button>
       <h3>项目</h3>
       <h3>用户</h3>
     </HeaderLeft>
